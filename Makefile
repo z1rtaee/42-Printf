@@ -4,21 +4,14 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = ft_strlen.c
 OBJS = $(SRCS:.c=.o)
 AR = ar -rcs
-LIBFT_DIR = ./LIBFT
-LIBFT = $(LIBFT_DIR)libft.a
-LIBFT_OBJS = libft/*.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I. -c $(<) -o $(@)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(AR) $(NAME) $(OBJS) $(LIBFT_OBJS)
-
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	@$(AR) $(NAME) $(OBJS)
 
 all: $(NAME)
-
 
 clean:
 	@rm -f $(OBJS)

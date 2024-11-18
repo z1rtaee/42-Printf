@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zirtaee <zirtaee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpires-r <bpires-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:44:41 by zirtaee           #+#    #+#             */
-/*   Updated: 2024/11/17 19:59:59 by zirtaee          ###   ########.fr       */
+/*   Updated: 2024/11/18 19:16:18 by bpires-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	main(void)
 {
-    printf("%zu\n", ft_strlen("Iza"));
+    printf("%zu  %%\n", ft_strlen("Iza"));
 	return (0);
 }
