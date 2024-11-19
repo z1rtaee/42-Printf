@@ -6,7 +6,7 @@
 /*   By: bpires-r <bpires-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:11:28 by bpires-r          #+#    #+#             */
-/*   Updated: 2024/11/19 17:40:13 by bpires-r         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:12:05 by bpires-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_printf(const char *s, ...)
 {
-	int	res;
-	va_list arg_lst;
-	
+	int		res;
+	va_list	arg_lst;
+
 	res = 0;
 	// if (!s)
 	// 	return (0);
@@ -26,7 +26,6 @@ int	ft_printf(const char *s, ...)
 		if (*s == '%')
 		{
 			s++;
-			
 		}
 		else
 			write(1, &*s, 1);
@@ -43,18 +42,24 @@ int	str_format(const char *s, va_list arg_lst)
 	c = 0;
 	if (*s == 'c')
 	{
-		c = va_arg(arg_lst, int)
-		res = res + write(1, &c, 1)
+		c = va_arg(arg_lst, int) res = res + write(1, &c, 1)
 	}
 	else if (*s == 's')
 		res = res + ft_putstr(va_arg(arg_lst, char *));
 	else if (*s == 'd' || *s == 'i')
-		res = res + ft_putnbr()
+		res = res + ft_putnbr(va_arg(arg_lst, int), 10, DECIMAL);
+	else if (*s == 'u')
+		res = res + ft_putnbr(va_arg(arg_lst, unsigned int), 10, DECIMAL);
+	else if (*s == 'X')
+		res = rews + ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_UP);
+	else if (*s == 'x')
+		res = res + ft_putnbr(va_arg(arg_lst, unsigned int));
+	else if (*s == )
 }
 
 int	ft_putstr(char *s)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	while (*s)
@@ -65,7 +70,7 @@ int	ft_putstr(char *s)
 	return (res);
 }
 
-int	ft_putnbr(char *s, long n, int base)
+int	ft_putnbr(long n, int base, char *base_str)
 {
 	int	res;
 	int	c;
@@ -73,21 +78,15 @@ int	ft_putnbr(char *s, long n, int base)
 	res = 0;
 	if (n < 0 && base == 10)
 	{
-		write (1, "-", 1);
+		res = res + write(1, "-", 1);
 		n = -n;
-		if (n > 0)
-			ft_putnbr(n / 10);
-		c = '0' + (n % 10);
-		res = res + write(1, &c, 1);
 	}
-	if (n < 0 && base == 16)
+	if (n >= base)
 	{
-		write (1, "-", 1);
-		n = -n;
-		if (n > 0)
-			ft_putnbr(n / 16);
-		c = '0' + (n % 16);
+		res = res + ft_putnbr(n / base, base, base_str);
+		c = '0' + (n % base);
 		res = res + write(1, &c, 1);
 	}
 	return (res);
 }
+int	ft_putptr()

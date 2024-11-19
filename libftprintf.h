@@ -6,7 +6,7 @@
 /*   By: bpires-r <bpires-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:42:02 by zirtaee           #+#    #+#             */
-/*   Updated: 2024/11/19 16:16:55 by bpires-r         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:51:51 by bpires-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #  define HEXA_UP "0123456789ABCDEF"
 # endif
 # ifndef HEXA_LOW
-# define HEXA_LOW "0123456789abcdef"
+#  define HEXA_LOW "0123456789abcdef"
 # endif
 
 size_t	ft_strlen(const char *s);
