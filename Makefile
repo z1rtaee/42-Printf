@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = ft_strlen.c
+SRCS = ft_strlen.c ft_printf.c
 OBJS = $(SRCS:.c=.o)
 AR = ar -rcs
 

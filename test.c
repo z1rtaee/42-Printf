@@ -6,7 +6,7 @@
 /*   By: bpires-r <bpires-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:44:41 by zirtaee           #+#    #+#             */
-/*   Updated: 2024/11/18 19:16:18 by bpires-r         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:56:29 by bpires-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(void)
 {
-    printf("%zu  %%\n", ft_strlen("Iza"));
+    printf("%d\n", 20);
+	ft_printf("%d\n", 20);
 	return (0);
 }
