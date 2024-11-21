@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpires-r <bpires-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zirtaee <zirtaee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:42:02 by zirtaee           #+#    #+#             */
-/*   Updated: 2024/11/19 17:51:51 by bpires-r         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:40:15 by zirtaee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdarg.h>
+# include <limits.h>
 
 # ifndef DECIMAL
 #  define DECIMAL "0123456789"

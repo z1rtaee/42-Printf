@@ -6,7 +6,7 @@
 /*   By: zirtaee <zirtaee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:11:28 by bpires-r          #+#    #+#             */
-/*   Updated: 2024/11/21 14:17:21 by zirtaee          ###   ########.fr       */
+/*   Updated: 2024/11/21 17:59:12 by zirtaee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_putstr(char *s)
 
 	res = 0;
 	if (!s)
-		write(1, "(null)", 6);
+		return (write(1, "(null)", 6));
 	while (*s)
 	{
 		res = res + write(1, &*s, 1);
@@ -30,7 +30,6 @@ int	ft_putstr(char *s)
 int	ft_putnbr(long n, int base, char *base_str)
 {
 	int	res;
-	int	c;
 
 	res = 0;
 	if (n < 0 && base == 10)
@@ -40,15 +39,13 @@ int	ft_putnbr(long n, int base, char *base_str)
 	}
 	if (n >= base)
 		res = res + ft_putnbr(n / base, base, base_str);
-	c = '0' + (n % base);
-	res = res + write(1, &c, 1);
+	res = res + write(1, &base_str[n % base], 1);
 	return (res);
 }
 
 int	ft_putptr(unsigned long int p, int prefix, char *base_str)
 {
 	int		res;
-	char	c;
 
 	res = 0;
 	if (!p)
@@ -57,38 +54,35 @@ int	ft_putptr(unsigned long int p, int prefix, char *base_str)
 		res = res + write(1, "0x", 2);
 	if (p >= 16)
 		res = res + ft_putptr(p / 16, 0, base_str);
-	c = '0' + (p % 16);
-	res = res + write(1, &c, 1);
+	res = res + write(1, &base_str[p % 16], 1);
 	return (res);
 }
 
 int	ft_format(const char *s, va_list arg_lst)
 {
-	int	res;
 	int	c;
 
-	res = 0;
 	c = 0;
 	if (*s == 'c')
 	{
 		c = va_arg(arg_lst, int);
-		res = res + write(1, &c, 1);
+		return (write(1, &c, 1));
 	}
 	else if (*s == 's')
-		res = res + ft_putstr(va_arg(arg_lst, char *));
+		return (ft_putstr(va_arg(arg_lst, char *)));
 	else if (*s == 'd' || *s == 'i')
-		res = res + ft_putnbr(va_arg(arg_lst, int), 10, DECIMAL);
+		return (ft_putnbr(va_arg(arg_lst, int), 10, DECIMAL));
 	else if (*s == 'u')
-		res = res + ft_putnbr(va_arg(arg_lst, unsigned int), 10, DECIMAL);
+		return(ft_putnbr(va_arg(arg_lst, unsigned int), 10, DECIMAL));
 	else if (*s == 'X')
-		res = res + ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_UP);
+		return(ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_UP));
 	else if (*s == 'x')
-		res = res + ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_LOW);
+		return(ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_LOW));
 	else if (*s == 'p')
-		res = res + ft_putptr(va_arg(arg_lst, unsigned long int), 1, HEXA_LOW);
+		return(ft_putptr(va_arg(arg_lst, unsigned long int), 1, HEXA_LOW));
 	else if (*s == '%')
-		res = res + write(1, "%", 1);
-	return (res);
+		return(write(1, "%", 1));
+	return (0);
 }
 
 int	ft_printf(const char *s, ...)
@@ -119,10 +113,12 @@ int	ft_printf(const char *s, ...)
 
 int	main(void)
 {
-	printf("Hello %% World!%%\n");
-	ft_printf("Hello %% World!%%\n");
-	char *s = "ola";
-	ft_printf("%s\n",s);
-	printf("%s\n", s);
+	char *s = NULL;
+	ft_printf("%d\n", 23);
+	ft_printf("%s\n", s);
+	printf("%s", s);
+	ft_printf("\n");
+	ft_printf("%p\n",s);
+	printf("%p\n", s);
 	return (0);
 }
