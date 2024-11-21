@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpires-r <bpires-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zirtaee <zirtaee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:11:28 by bpires-r          #+#    #+#             */
-/*   Updated: 2024/11/20 20:18:17 by bpires-r         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:06:42 by zirtaee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
 
 int	ft_putstr(char *s)
 {
@@ -40,11 +39,26 @@ int	ft_putnbr(long n, int base, char *base_str)
 		n = -n;
 	}
 	if (n >= base)
-	{
 		res = res + ft_putnbr(n / base, base, base_str);
-		c = '0' + (n % base);
-		res = res + write(1, &c, 1);
-	}
+	c = '0' + (n % base);
+	res = res + write(1, &c, 1);
+	return (res);
+}
+
+int	ft_putptr(unsigned long int p, int prefix, char *base_str)
+{
+	int		res;
+	char	c;
+
+	res = 0;
+	if (!p)
+		return (ft_putstr("(nil)"));
+	if (prefix == 1)
+		res = res + write(1, "0x", 2);
+	if (p >= 16)
+		res = res + ft_putptr(p / 16, 0, base_str);
+	c = '0' + (p % 16);
+	res = res + write(1, &c, 1);
 	return (res);
 }
 
@@ -57,7 +71,7 @@ int	ft_format(const char *s, va_list arg_lst)
 	c = 0;
 	if (*s == 'c')
 	{
-		c = va_arg(arg_lst, int); 
+		c = va_arg(arg_lst, int);
 		res = res + write(1, &c, 1);
 	}
 	else if (*s == 's')
@@ -70,42 +84,41 @@ int	ft_format(const char *s, va_list arg_lst)
 		res = res + ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_UP);
 	else if (*s == 'x')
 		res = res + ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_LOW);
-	// else if (*s == 'p')
-	// 	re = res + 
+	else if (*s == 'p')
+		res = res + ft_putptr(va_arg(arg_lst, unsigned long int), 1, HEXA_LOW);
 	return (res);
 }
+
 int	ft_printf(const char *s, ...)
 {
 	int		res;
 	va_list	arg_lst;
+	size_t	i;
 
+	if (!s)
+		return (-1);
+	i = 0;
 	res = 0;
 	va_start(arg_lst, s);
-	while (*s)
+	while (s[i])
 	{
-		if (*s == '%')
+		if (s[i] == '%')
 		{
-			s++;
-			res = res + ft_format(&*s, arg_lst);
+			i++;
+			res = res + ft_format(&s[i], arg_lst);
 		}
 		else
-			write(1, &*s, 1);
+			res = res + write(1, &s[i], 1);
 		s++;
 	}
+	va_end (arg_lst);
 	return (res);
 }
 
-// int	zt_putptr(void *p)
-// {
-// 	unsigned long ptr;
-
-// 	ptr = (unsigned long)p
-// 	if (!ptr)
-// 		return (zt_putstr("(nil)"));
-	
-// }
-
-int main()
+int	main(void)
 {
-	ft_printf("%d",234);
+	char *s = "ola";
+	ft_printf("%s\n",s);
+	printf("%s\n", s);
+	return (0);
 }
