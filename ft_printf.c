@@ -6,7 +6,7 @@
 /*   By: zirtaee <zirtaee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:11:28 by bpires-r          #+#    #+#             */
-/*   Updated: 2024/11/21 14:06:42 by zirtaee          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:17:21 by zirtaee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	ft_format(const char *s, va_list arg_lst)
 		res = res + ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_LOW);
 	else if (*s == 'p')
 		res = res + ft_putptr(va_arg(arg_lst, unsigned long int), 1, HEXA_LOW);
+	else if (*s == '%')
+		res = res + write(1, "%", 1);
 	return (res);
 }
 
@@ -117,6 +119,8 @@ int	ft_printf(const char *s, ...)
 
 int	main(void)
 {
+	printf("Hello %% World!%%\n");
+	ft_printf("Hello %% World!%%\n");
 	char *s = "ola";
 	ft_printf("%s\n",s);
 	printf("%s\n", s);
