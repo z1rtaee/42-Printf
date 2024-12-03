@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zirtaee <zirtaee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpires-r <bpires-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:11:28 by bpires-r          #+#    #+#             */
-/*   Updated: 2024/11/21 17:59:12 by zirtaee          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:06:37 by bpires-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putstr(char *s)
 {
@@ -73,15 +73,15 @@ int	ft_format(const char *s, va_list arg_lst)
 	else if (*s == 'd' || *s == 'i')
 		return (ft_putnbr(va_arg(arg_lst, int), 10, DECIMAL));
 	else if (*s == 'u')
-		return(ft_putnbr(va_arg(arg_lst, unsigned int), 10, DECIMAL));
+		return (ft_putnbr(va_arg(arg_lst, unsigned int), 10, DECIMAL));
 	else if (*s == 'X')
-		return(ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_UP));
+		return (ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_UP));
 	else if (*s == 'x')
-		return(ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_LOW));
+		return (ft_putnbr(va_arg(arg_lst, unsigned int), 16, HEXA_LOW));
 	else if (*s == 'p')
-		return(ft_putptr(va_arg(arg_lst, unsigned long int), 1, HEXA_LOW));
+		return (ft_putptr(va_arg(arg_lst, unsigned long int), 1, HEXA_LOW));
 	else if (*s == '%')
-		return(write(1, "%", 1));
+		return (write(1, "%", 1));
 	return (0);
 }
 
@@ -111,14 +111,13 @@ int	ft_printf(const char *s, ...)
 	return (res);
 }
 
-int	main(void)
-{
-	char *s = NULL;
-	ft_printf("%d\n", 23);
-	ft_printf("%s\n", s);
-	printf("%s", s);
-	ft_printf("\n");
-	ft_printf("%p\n",s);
-	printf("%p\n", s);
-	return (0);
-}
+// int	main(void)
+// {
+// 	char *s = NULL;
+// 	ft_printf("%d\n", 23);
+// 	ft_printf("%s\n", s);
+// 	printf("%s\n", s);
+// 	ft_printf("%p\n",s);
+// 	printf("%p\n", s);
+// 	return (0);
+// }
